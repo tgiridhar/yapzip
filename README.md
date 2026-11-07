@@ -111,7 +111,6 @@ yapzip divides the input into units. A unit is one line, or one code block from 
 
 - The notes are lossy. The model can change a meaning, for example when it removes "only". Check important facts in the source.
 - yapzip compresses each block alone. Thus a summary at the end of a long article can repeat facts from earlier blocks.
-- A code block must start at the start of a line. After a fence in the middle of a line, such as ` dana: ``` `, yapzip can copy the next lines as code.
 
 ## Build
 

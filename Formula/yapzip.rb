@@ -6,7 +6,7 @@
 class Yapzip < Formula
   desc "Local text compressor: long articles, chats and threads into terse notes"
   homepage "https://github.com/tgiridhar/yapzip"
-  url "https://github.com/tgiridhar/yapzip.git", tag: "v0.2.0"
+  url "https://github.com/tgiridhar/yapzip.git", tag: "v0.2.1"
   license "MIT"
   head "https://github.com/tgiridhar/yapzip.git", branch: "main"
 

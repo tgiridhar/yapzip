@@ -189,6 +189,14 @@ EXAMPLES
 )HELP", out);
 }
 
+// Code fences (```) on a line. An odd count opens or closes a code block, wherever the fence sits:
+// "```bash", "dana: ```" and "end```" all count; "```x```" (inline) does not.
+static int fences(const std::string & s) {
+    int n = 0;
+    for (size_t p = s.find("```"); p != std::string::npos; p = s.find("```", p + 3)) n++;
+    return n;
+}
+
 static std::string trim(const std::string & s) {
     size_t a = s.find_first_not_of(" \t\r\n");
     if (a == std::string::npos) return "";
@@ -334,7 +342,7 @@ class Compressor {
             next_ = i;                             // units before i are done (written or dropped)
             if (p[i] < a_.threshold) {
                 // code is never dropped: a fenced block the model scored low is copied verbatim instead
-                if (units[i].rfind("```", 0) == 0) emit(units[i] + "\n", units[i] + "\n");
+                if (fences(units[i])) emit(units[i] + "\n", units[i] + "\n");
                 continue;
             }
             kept++;
@@ -402,7 +410,7 @@ class Compressor {
     std::string fallback(const std::vector<std::string> & units) const {
         std::string rest;
         for (size_t k = next_; k < units.size(); k++)
-            if (p_.empty() || p_[k] >= a_.threshold || units[k].rfind("```", 0) == 0) rest += units[k] + "\n";
+            if (p_.empty() || p_[k] >= a_.threshold || fences(units[k])) rest += units[k] + "\n";
         return rest;
     }
 
@@ -608,10 +616,10 @@ int main(int argc, char ** argv) {
         std::string t = trim(line);
         if (in_fence) {
             fence += "\n" + line;
-            if (t.rfind("```", 0) == 0) { in_fence = false; add_unit(fence); }
+            if (fences(t) % 2) { in_fence = false; add_unit(fence); }
             continue;
         }
-        if (t.rfind("```", 0) == 0) { in_fence = true; fence = t; continue; }
+        if (fences(t) % 2) { in_fence = true; fence = t; continue; }
         if (!t.empty()) add_unit(t);
     }
     if (in_fence) add_unit(fence + "\n```");   // input ended inside a code block: close it so readers see valid code
