@@ -1,0 +1,36 @@
+# local models, binaries, environments
+models/
+bin/
+build/
+native/llama.cpp/
+.venv/
+__pycache__/
+.playwright-mcp/
+# large or derived artifacts
+*.safetensors
+*.gguf
+*.log
+results/out*/
+results/stats/
+results/qwen_two_stage/
+colab/data/
+data/threads/
+build-configure.log
+build.log
+
+# local-only test data and outputs
+results/private/
+
+# articles pasted from paid sites: personal use only, never commit
+data/pasted/
+
+# not published: training data, source texts, eval inputs and outputs (data/sample_train.jsonl shows the format)
+data/*
+!data/STYLE.md
+!data/sample_train.jsonl
+!data/toy.py
+results/
+colab/*.zip
+colab/*.npz
+native/include/
+yap.txt

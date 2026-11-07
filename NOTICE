@@ -1,0 +1,21 @@
+yapzip
+Copyright (c) 2026 Giri Tata
+The yapzip code is licensed under the MIT License (LICENSE).
+
+yapzip is provided "AS IS", WITHOUT WARRANTY OF ANY KIND. Its output is lossy, machine-written
+notes that can be incomplete or wrong; check anything important against the source.
+
+Third-party components:
+
+1. Qwen3.5-0.8B (model weights)
+   Copyright 2026 Alibaba Cloud. Licensed under the Apache License, Version 2.0
+   (licenses/Qwen3.5-0.8B-LICENSE). https://huggingface.co/Qwen/Qwen3.5-0.8B
+
+   The yapzip model (yapzip-v4c-q8_0.gguf) is a modified version of these weights. Changes made:
+   fine-tuned with LoRA adapters that were merged into the weights, a few feed-forward neurons
+   edited directly (weight-space edits), and quantized to Q8_0 in GGUF format. The yapzip model is
+   distributed under the Apache License, Version 2.0.
+
+2. llama.cpp and ggml (inference library, statically linked into the yapzip binary)
+   Copyright (c) 2023-2026 The ggml authors. Licensed under the MIT License
+   (licenses/llama.cpp-LICENSE). https://github.com/ggml-org/llama.cpp
